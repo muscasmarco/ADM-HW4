@@ -7,7 +7,7 @@ Created on Mon Nov 25 15:12:34 2019
 """
 
 def counting_sort_integers(input_int_list):
-    ''' Here I'm supposing to know the values range, which is [0-9], all integers'''
+    ''' Here I'm supposing to know the values range, which is [0-9], all are integers'''
     counter = [0] * (9+1) # From 0-9 -> 10 elements in counter array
     
     #counter = [0] * (max(input_int_list) + 1) # This could be used in case I didn't know the max possible value in the list. It's against the definition of counting sort though.
@@ -17,13 +17,14 @@ def counting_sort_integers(input_int_list):
         counter[n] += 1
         
     sorted_list = [0] * len(input_int_list) # Default value for sorted list is not in range [0-9] (debug purposes)
-    current_index = 0
+    current_index = 0 # We have to keep track of the next available index in the sorted list
     
-    for i in range(len(counter)):
-        count = counter[i]
-        if count > 0:
-            sorted_list[current_index:(current_index+count)] = [i] * count
+    for i in range(len(counter)): # We have to use values in range [0-len(counter)]-> [0-9].
+        count = counter[i] # How many occurrences have there been in the input list?
+        if count > 0: # If there is something to put in the sorted list
+            sorted_list[current_index:(current_index+count)] = [i] * count # Then put them (count) at a times
             current_index += count
+            
     return sorted_list
 
 
