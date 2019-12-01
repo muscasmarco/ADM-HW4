@@ -139,20 +139,19 @@ def count_sort_list_of_strings(strings, length_m, string_len_n):
     for i in range(length_m):
         l[len(strings[i])].append(strings[i])
 #        mapped_string = map_string_to_list(strings[i])
-#s        matrix[i, :len(mapped_string)] = mapped_string
+#        matrix[i, :len(mapped_string)] = mapped_string
             
             
     return l
 
 
 
-
-if __name__ == '__main__':
+def test_counting_sort_for_integers_chars():
     ''' Empirical results from counting sort for single words'''
     
     strings = []
     letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
-    '''
+    
     # Generate random strings of length from 1 to (iterations)
     iterations = 5000
     for i in range(1, iterations+1):
@@ -181,7 +180,8 @@ if __name__ == '__main__':
     times = [x[0] for x in performance]
     plt.plot(times)
     plt.show()
-    '''
+
+def test_counting_sort_strings():
     ''' Empirical results from counting sort applied to list of strings '''
     s = ['a', 'ab', 'ba', 'aba','aaa','abc','baa','abc','aabc','aaaa','abbb','babbb','ccc','ddddd', 'AAAA']
     m = len(s)
