@@ -14,7 +14,7 @@ We preemptively saved into a file a list of all prime numbers smaller than the s
 def coefficients():
     with open('primes.json') as pr:
         primes = json.load(pr)
-    primes_split = [*np.array_split(primes, 20)]
+    primes_split = [*np.array_split(list(primes), 20)]
     c1, c2 = [], []
     for i in range(20):
         c1.append(choice(primes_split[i]))
