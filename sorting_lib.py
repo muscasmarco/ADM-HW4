@@ -96,55 +96,40 @@ def count_sort_list_of_strings_inefficient(strings, length_m, string_len_n):
     return res
 '''
 
-def map_string_to_list(string):
-    res = []   
-    for c in string:
-        res.append(map_char_to_int(c))       
+def radix_sort(strings, i):
+    letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
+    res = []
     
+    if len(strings) < 2:
+        return strings
+    else:
+        s_dict = {k:[] for k in letters}
+        
+        for s in strings:
+            s_dict[s[i]].append(s)
+            
+        for k in s_dict.keys():
+            if s_dict[k] != []:
+                res.extend(radix_sort(s_dict[k], i+1))
+
     return res
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+def counting_sort_strings(strings, m_num_strings, n_max_string_length):
     
-def count_sort_list_of_strings(strings, length_m, string_len_n):
+    subgroups = [[] for _ in range(n_max_string_length + 1)]
     
-    l = [[] for _ in range(string_len_n + 1)]
- #   matrix = np.zeros(shape=(length_m, string_len_n), dtype=np.int8)
-    
-    for i in range(length_m):
-        l[len(strings[i])].append(strings[i])
-#        mapped_string = map_string_to_list(strings[i])
-#        matrix[i, :len(mapped_string)] = mapped_string
-            
-            
-    return l
+    for string in strings:
+        subgroups[len(string)-1].append(string)
 
 
+    res = []
+    for s in subgroups:
+        if len(s) > 0:
+            tmp_r = radix_sort(s, 0)
+            res.extend(tmp_r)
+
+    return res
 
 def test_counting_sort_for_integers_chars():
     ''' Empirical results from counting sort for single words'''
@@ -183,12 +168,14 @@ def test_counting_sort_for_integers_chars():
 
 def test_counting_sort_strings():
     ''' Empirical results from counting sort applied to list of strings '''
-    s = ['a', 'ab', 'ba', 'aba','aaa','abc','baa','abc','aabc','aaaa','abbb','babbb','ccc','ddddd', 'AAAA']
+    s = ['a', 'ab', 'bab', 'aba','b']
     m = len(s)
-    n = 5
-    r = count_sort_list_of_strings(s, m, n)
-        
+    n = 3
+    r = counting_sort_strings(s, m, n)
+       
+    return r
     
-
+if __name__ == '__main__':
+    res = test_counting_sort_strings()
 
     
