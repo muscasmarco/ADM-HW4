@@ -60,66 +60,11 @@ def counting_sort_list_letters(input_str):
             
     return sorted_array
 
+def counting_sort_chars(list_of_chars):
+    mapping = [ord(c) for c in list_of_chars]
+    mapping = counting_sort_integers(mapping, max(mapping))
+    return [chr(x) for x in mapping]
 
-''' This becomes useful ONLY IF the strings to compare are of the same length. '''
-def map_char_to_int(letter):
-    letters_dict = dict()
-    letters_dict['a'] = 1
-    letters_dict['b'] = 2
-    letters_dict['c'] = 3
-    letters_dict['d'] = 4
-    letters_dict['e'] = 5
-    letters_dict['f'] = 6
-    letters_dict['g'] = 7
-    letters_dict['h'] = 8
-    letters_dict['i'] = 9
-    letters_dict['j'] = 10
-    letters_dict['k'] = 11
-    letters_dict['l'] = 12
-    letters_dict['m'] = 13
-    letters_dict['n'] = 14
-    letters_dict['o'] = 15
-    letters_dict['p'] = 16
-    letters_dict['q'] = 17
-    letters_dict['r'] = 18
-    letters_dict['s'] = 19
-    letters_dict['t'] = 20
-    letters_dict['u'] = 21
-    letters_dict['v'] = 22
-    letters_dict['w'] = 23
-    letters_dict['x'] = 24
-    letters_dict['y'] = 25
-    letters_dict['z'] = 26
-    
-    '''
-    letters_dict['a'] = 27
-    letters_dict['b'] = 28
-    letters_dict['c'] = 29
-    letters_dict['d'] = 30
-    letters_dict['e'] = 31
-    letters_dict['f'] = 32
-    letters_dict['g'] = 33
-    letters_dict['h'] = 34
-    letters_dict['i'] = 35
-    letters_dict['j'] = 36
-    letters_dict['k'] = 37
-    letters_dict['l'] = 38
-    letters_dict['m'] = 39
-    letters_dict['n'] = 40
-    letters_dict['o'] = 41
-    letters_dict['p'] = 42
-    letters_dict['q'] = 43
-    letters_dict['r'] = 44
-    letters_dict['s'] = 45
-    letters_dict['t'] = 46
-    letters_dict['u'] = 47
-    letters_dict['v'] = 48
-    letters_dict['w'] = 49
-    letters_dict['x'] = 50
-    letters_dict['y'] = 51
-    letters_dict['z'] = 52
-    '''
-    return letters_dict[letter]
 
 ''' This implementation works, but it's absolutely inefficient resources-wise.
     The keys (integers) used in the counting sort for strings become very large, very quickly.
@@ -151,34 +96,53 @@ def count_sort_list_of_strings_inefficient(strings, length_m, string_len_n):
     return res
 '''
 
-def map_to_int(string, max_len):
-    
-    res = 0
-    
-    for i in range(len(string)):
-        exp = max_len - i
-        
-        res += map_char_to_int(string[i]) * (10 ** exp)
+def map_string_to_list(string):
+    res = []   
+    for c in string:
+        res.append(map_char_to_int(c))       
     
     return res
-  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
 def count_sort_list_of_strings(strings, length_m, string_len_n):
     
-    d = dict()
+    l = [[] for _ in range(string_len_n + 1)]
+ #   matrix = np.zeros(shape=(length_m, string_len_n), dtype=np.int8)
     
     for i in range(length_m):
-        
-        s = strings[i]
-        mapping = map_to_int(s, length_m)
-        d[mapping] = s
-    
-    max_int = max(d.keys())
-    k_sorted = counting_sort_integers(d.keys(), max_int)    
-    
-    res = []
-    for k in k_sorted:
-        res.append(d[k])
-    return res
+        l[len(strings[i])].append(strings[i])
+#        mapped_string = map_string_to_list(strings[i])
+#s        matrix[i, :len(mapped_string)] = mapped_string
+            
+            
+    return l
 
 
 
@@ -219,7 +183,7 @@ if __name__ == '__main__':
     plt.show()
     '''
     ''' Empirical results from counting sort applied to list of strings '''
-    s = ['a', 'ab', 'ba', 'aba','aaa','abc','baa','abc','aabc','aaaa','abbb','babbb','ccc','ddddd']
+    s = ['a', 'ab', 'ba', 'aba','aaa','abc','baa','abc','aabc','aaaa','abbb','babbb','ccc','ddddd', 'AAAA']
     m = len(s)
     n = 5
     r = count_sort_list_of_strings(s, m, n)
