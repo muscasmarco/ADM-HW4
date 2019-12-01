@@ -34,7 +34,7 @@ def hash_functions(s, c1, c2, m):
                   
             
 # Functions that update the bloom filter with a new password                
-def bloom_filter_update(password, c1, c2, B):
+def bloom_filter_update(password, c1, c2, B, m):
     a, b = hash_functions(password, c1, c2, m)
     B[a], B[b] = 1, 1                 
 
