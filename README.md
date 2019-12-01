@@ -19,4 +19,4 @@ Homework 4 - ADM
   Python file containing all functions used for task 3
   
  6. ***part4.rtf***</p>
-  text file for task 4
+  Text file for task 4
