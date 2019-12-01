@@ -78,7 +78,7 @@ def map_string_to_int(string): # Mapping to int allows for an ordering of string
     return res
 
 def count_sort_list_of_strings_inefficient(strings, length_m, string_len_n):
-    len_list = [dict() for i in range(string_len_n + 1)]
+    len_list = [[]for i in range(string_len_n + 1)]
     res = []
 
     for s in strings:
