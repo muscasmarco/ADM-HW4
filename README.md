@@ -14,4 +14,9 @@ Homework 4 - ADM
   
 4. ***sorting_lib.py***</p>
   Python file containing all functions used for task 2  
+ 
+ 5. ***clustering_lib.py***</p>
+  Python file containing all functions used for task 3
   
+ 6. ***part4.rtf***</p>
+  text file for task 4
